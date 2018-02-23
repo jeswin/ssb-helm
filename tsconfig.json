@@ -4,6 +4,7 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "dist",
+    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
