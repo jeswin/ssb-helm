@@ -1,0 +1,8 @@
+src/*
+dist/test/*
+build.sh
+.jshintrc
+.gitignore
+static/bundle.js
+static/bundle.js.map
+flow-errors.txt
