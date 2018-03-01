@@ -1,91 +1,57 @@
 import { Menu, Tray, MenuItem } from "electron";
 import * as path from "path";
+import { HelmConfig, NetworkConfig } from "../types";
 
-export function createTrayMenu() {
-  const tray = new Tray(path.join(__dirname, "../../icon.png"));
+type NetworkMenuItem = {
+  label: string;
+  submenu?: {
+    label: string;
+  }[];
+};
 
-  const networks = new MenuItem({
-    label: "Networks (master active)",
+function makeMenuItemForNetwork(
+  network: NetworkConfig,
+  config: HelmConfig
+): NetworkMenuItem {
+  return {
+    label: network.name,
     submenu: [
       {
-        label: "master (running, 2.1GB)",
-        submenu: [
-          {
-            label: "Stop"
-          },
-          {
-            label: "Generate Invite"
-          },
-          {
-            label: "Manage Plugins"
-          },
-          {
-            label: "Manage Space"
-          },
-          {
-            label: "Settings"
-          }
-
-        ]
+        label: !config.activeNetworks.includes(network.name) ? "Start" : "Stop"
       },
       {
-        label: "intranet (0.5GB)",
-        submenu: [
-          {
-            label: "Start"
-          },
-          {
-            label: "Manage Plugins"
-          },
-          {
-            label: "Manage Space"
-          },
-          {
-            label: "Settings"
-          }
-
-        ]
+        label: `Generate Invite`
       },
       {
-        label: "testnet (0.1GB)",
-        submenu: [
-          {
-            label: "Start"
-          },
-          {
-            label: "Manage Plugins"
-          },
-          {
-            label: "Manage Space"
-          },
-          {
-            label: "Settings"
-          }
-
-        ]
+        label: `Manage Plugins`
       },
       {
-        label: "personal (5.5GB)",
-        submenu: [
-          {
-            label: "Start"
-          },
-          {
-            label: "Manage Plugins"
-          },
-          {
-            label: "Manage Space"
-          },
-          {
-            label: "Settings"
-          }
-        ]
+        label: `Manage Space`
       },
       {
-        label: "Add Networks"
+        label: `Settings`
       }
     ]
-  });
+  };
+}
+
+export function createTrayMenu(config: HelmConfig) {
+  const tray = new Tray(path.join(__dirname, "../../icon.png"));
+
+  const active =
+    config.activeNetworks.length > 1
+      ? `${config.activeNetworks.length} active`
+      : config.activeNetworks.length === 1
+        ? `${config.activeNetworks[0]} active`
+        : "inactive";
+
+  const networkItems: NetworkMenuItem[] = config.networks
+    .map(n => makeMenuItemForNetwork(n, config))
+    .concat({
+      label: "Add Networks"
+    });
+
+  console.log(networkItems);
 
   const apps = new MenuItem({
     label: "Apps (12)",
@@ -120,7 +86,7 @@ export function createTrayMenu() {
   });
 
   const menu = new Menu();
-  menu.append(networks);
+  menu.append(networkItems as any);
   menu.append(apps);
   menu.append(settings);
   tray.setToolTip("Helm for Secure ScuttleButt.");

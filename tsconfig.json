@@ -5,12 +5,11 @@
     "sourceMap": true,
     "outDir": "dist",
     "jsx": "react",
+    "lib": ["es2017", "dom"],
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

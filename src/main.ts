@@ -2,6 +2,7 @@ import { app, BrowserWindow, Menu, Tray, MenuItem } from "electron";
 import * as path from "path";
 import * as url from "url";
 import * as traySvc from "./services/tray";
+import * as configuration from "./services/config";
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -49,8 +50,9 @@ app.on("window-all-closed", () => {
   }
 });
 
-app.on("ready", () => {
-  traySvc.createTrayMenu();
+app.on("ready", async () => {
+  const config = await configuration.readConfig();
+  traySvc.createTrayMenu(config);
 });
 
 app.on("activate", () => {

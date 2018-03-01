@@ -1,8 +1,8 @@
-export interface Todo {
-  id: string,
-  text: string,
-  assignee: string,
-  dueDate: string,
-  dueDateMS: number
+export interface NetworkConfig {
+  name: string
+}
+export interface HelmConfig {
+  networks: NetworkConfig[];
+  activeNetworks: string[];
 }
 
