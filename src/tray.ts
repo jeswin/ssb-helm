@@ -1,11 +1,21 @@
-import { Menu, Tray, MenuItem } from "electron";
+import { Menu, Tray, MenuItem, BrowserWindow } from "electron";
 import * as path from "path";
-import { HelmConfig, NetworkConfig } from "../types";
+import { HelmConfig, NetworkConfig } from "./types";
+import * as uiHost from "./uiHost";
+import * as ui from "./ui";
+
+type ClickEventHandler = (
+  menuItem: MenuItem,
+  browserWindow: BrowserWindow,
+  event: Event
+) => void;
 
 type NetworkMenuItem = {
   label: string;
+  click?: ClickEventHandler;
   submenu?: {
     label: string;
+    click?: ClickEventHandler;
   }[];
 };
 
@@ -36,22 +46,26 @@ function makeMenuItemForNetwork(
 }
 
 export function createTrayMenu(config: HelmConfig) {
-  const tray = new Tray(path.join(__dirname, "../../icon.png"));
+  const tray = new Tray(path.join(__dirname, "../icon.png"));
 
   const active =
     config.activeNetworks.length > 1
       ? `${config.activeNetworks.length} active`
       : config.activeNetworks.length === 1
-        ? `${config.activeNetworks[0]} active`
+        ? `${config.activeNetworks[0]} is active`
         : "inactive";
 
   const networkItems: NetworkMenuItem[] = config.networks
     .map(n => makeMenuItemForNetwork(n, config))
     .concat({
-      label: "Add Networks"
+      label: "Add Networks",
+      click: () => ui.addNewNetwork()
     });
 
-  console.log(networkItems);
+  const networkMenu = new MenuItem({
+    label: `Networks (${active})`,
+    submenu: networkItems
+  });
 
   const apps = new MenuItem({
     label: "Apps (12)",
@@ -72,23 +86,19 @@ export function createTrayMenu(config: HelmConfig) {
   });
 
   const settings = new MenuItem({
-    label: "Settings",
-    submenu: [
-      {
-        label: "Network Stats"
-      },
-      {
-        label: "Run on startup",
-        type: "checkbox",
-        checked: true
-      }
-    ]
+    label: "Settings"
+  });
+
+  const quit = new MenuItem({
+    label: "Quit",
+    click: () => uiHost.quit()
   });
 
   const menu = new Menu();
-  menu.append(networkItems as any);
+  menu.append(networkMenu);
   menu.append(apps);
   menu.append(settings);
+  menu.append(quit);
   tray.setToolTip("Helm for Secure ScuttleButt.");
   tray.setContextMenu(menu);
 }
