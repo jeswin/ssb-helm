@@ -1,5 +1,5 @@
-import { navigateTo } from "../uiHost";
+import { loadUrl } from "../uiHost";
 
 export function addNewNetwork() {
-  navigateTo("/addNewNetwork");
+  loadUrl("/addNewNetwork");
 }

@@ -1,5 +1,4 @@
-import { app, BrowserWindow, Menu, Tray, MenuItem } from "electron";
-import * as sailboat from "sailboat";
+import { app, BrowserWindow, Menu, Tray, MenuItem, ipcMain } from "electron";
 import * as path from "path";
 import * as url from "url";
 
@@ -38,7 +37,7 @@ export function createWindow(options: BrowserWindowOptions = {}) {
   //We'll start minimized.
   mainWindow.hide();
 
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -54,7 +53,7 @@ export async function quit() {
   app.quit();
 }
 
-export function navigateTo(url: string) {
-  sailboat.navigateTo(url);
+export async function loadUrl(url: string, data?: any) {
+  mainWindow.webContents.send("loadUrl", { url, data });
   mainWindow.show();
 }
