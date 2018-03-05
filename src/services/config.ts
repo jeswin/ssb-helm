@@ -10,12 +10,10 @@ const ssbKeys = require("ssb-keys");
 export function updateConfig() {}
 
 function isLocalHost(host: string) {
-  return (
-    host && ["localhost", "127.0.0.1", "0.0.0.0"].includes(host)
-  );
+  return host && ["localhost", "127.0.0.1", "0.0.0.0"].includes(host);
 }
 
-export function readConfig() : HelmConfig {
+export function readConfig(): HelmConfig {
   const homeDir = env.getHomeDirectory();
   const configFile = path.join(homeDir, ".ssb-helm", "config");
 

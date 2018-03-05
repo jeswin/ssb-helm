@@ -103,4 +103,6 @@ export function createTrayMenu(config: HelmConfig) {
   tray.setContextMenu(menu);
 }
 
-export function updateMenu() {}
+export function updateMenu() {
+  
+}
