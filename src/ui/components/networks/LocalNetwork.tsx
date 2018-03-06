@@ -50,7 +50,7 @@ export default function() {
           style={styles.toggle}
         />
       </p>
-      <p>
+      <p style={{ paddingTop: "1em" }}>
         <RaisedButton style={{ width: 140 }} primary={true}>
           Add Network
         </RaisedButton>

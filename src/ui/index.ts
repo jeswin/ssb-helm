@@ -1,5 +1,9 @@
 import { loadUrl } from "../uiHost";
 
-export function addNewNetwork() {
-  loadUrl("/addNewNetwork", { width: 400, height: 600 });
-}
+const networks = {
+  add() {
+    loadUrl("/networks.add", { width: 400, height: 600 });
+  }
+};
+
+export { networks };

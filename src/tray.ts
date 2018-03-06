@@ -59,7 +59,7 @@ export function createTrayMenu(config: HelmConfig) {
     .map(n => makeMenuItemForNetwork(n, config))
     .concat({
       label: "Add Networks",
-      click: () => ui.addNewNetwork()
+      click: () => ui.networks.add()
     });
 
   const networkMenu = new MenuItem({
