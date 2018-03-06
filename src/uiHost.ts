@@ -37,7 +37,7 @@ export function createWindow(options: BrowserWindowOptions = {}) {
   //We'll start minimized.
   mainWindow.hide();
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -53,7 +53,19 @@ export async function quit() {
   app.quit();
 }
 
-export async function loadUrl(url: string, data?: any) {
+type WindowAttributes = {
+  width: number;
+  height: number;
+};
+
+export async function loadUrl(
+  url: string,
+  windowAttributes: WindowAttributes,
+  data?: any
+) {
+  if (windowAttributes.width) {
+    mainWindow.setSize(windowAttributes.width, windowAttributes.height);
+  }
   mainWindow.webContents.send("loadUrl", { url, data });
   mainWindow.show();
 }

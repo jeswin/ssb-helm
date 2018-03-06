@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import AddNewNetwork from "./components/networks/AddNewNetwork";
 import { Router, navigateTo } from "sailboat";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 
@@ -44,7 +44,7 @@ const App = () =>
   });
 
 ReactDOM.render(
-  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <App />
   </MuiThemeProvider>,
   document.getElementById("container")
