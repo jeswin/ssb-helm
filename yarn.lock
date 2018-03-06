@@ -1381,9 +1381,9 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-sailboat@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/sailboat/-/sailboat-0.0.7.tgz#91bcb3d48f37ed94f225da15816f2aed1c00b208"
+sailboat@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/sailboat/-/sailboat-0.0.8.tgz#948ae3985e7170167e351509e4c34f1be2505ae8"
   dependencies:
     "@types/react" "^16.0.38"
     "@types/react-dom" "^16.0.4"

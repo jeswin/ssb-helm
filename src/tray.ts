@@ -25,23 +25,35 @@ function makeMenuItemForNetwork(
 ): NetworkMenuItem {
   return {
     label: network.name,
-    submenu: [
-      {
-        label: !config.activeNetworks.includes(network.name) ? "Start" : "Stop"
-      },
-      {
-        label: `Generate Invite`
-      },
-      {
-        label: `Manage Plugins`
-      },
-      {
-        label: `Manage Space`
-      },
-      {
-        label: `Settings`
-      }
-    ]
+    submenu:
+      network.type === "local"
+        ? [
+            {
+              label: !config.activeNetworks.includes(network.name)
+                ? "Start"
+                : "Stop"
+            },
+            {
+              label: `Generate Invite`
+            },
+            {
+              label: `Manage Plugins`
+            },
+            {
+              label: `Manage Space`
+            },
+            {
+              label: `Settings`
+            }
+          ]
+        : [
+            {
+              label: "Generate Invite"
+            },
+            {
+              label: "Settings"
+            }
+          ]
   };
 }
 
@@ -103,6 +115,4 @@ export function createTrayMenu(config: HelmConfig) {
   tray.setContextMenu(menu);
 }
 
-export function updateMenu() {
-  
-}
+export function updateMenu() {}

@@ -37,7 +37,7 @@ export function createWindow(options: BrowserWindowOptions = {}) {
   //We'll start minimized.
   mainWindow.hide();
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
