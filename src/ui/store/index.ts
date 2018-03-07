@@ -1,15 +1,21 @@
 import * as jetpack from "redux-jetpack";
 
-const initialState = {
-  networks: [
-    { type: "ssb", count: 1000 },
-    { type: "ipfs", count: 100 },
-    { type: "dat", count: 10 }
-  ],
-  user: {
-    name: "jeswin"
-  }
+/* Plugins */
+export type Plugins = {
+  network: string;
+  isLoading: boolean;
+  plugins: string[];
 };
+
+export type PluginsLoading = {
+  isLoading: boolean;
+};
+
+export type State = {
+  plugins?: Plugins;
+};
+
+const initialState: State = {};
 
 const store = jetpack.createStore(initialState);
 

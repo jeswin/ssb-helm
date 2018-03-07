@@ -34,10 +34,8 @@ function makeMenuItemForNetwork(
                 : "Stop"
             },
             {
-              label: `Generate Invite`
-            },
-            {
-              label: `Manage Plugins`
+              label: `Manage Plugins`,
+              click: () => ui.networks.managePlugins()
             },
             {
               label: `Manage Space`

@@ -7,6 +7,9 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
+import ManagePlugins from "./components/networks/ManagePlugins";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ipcRenderer.on("loadUrl", (e: any, data: any) => {
   console.log(data);
@@ -20,17 +23,23 @@ ipcRenderer.on("loadUrl", (e: any, data: any) => {
 const App = () =>
   Router({
     index: <div>Home</div>,
-    networks() {
-      return {
-        add: <AddNewNetwork />
-      };
+    networks: {
+      add: <AddNewNetwork />,
+      plugins: {
+        manage: <ManagePlugins />
+      }
     }
   });
 
 ReactDOM.render(
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-    <App />
-  </MuiThemeProvider>,
+  <Provider store={store.reduxStore}>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <App />
+    </MuiThemeProvider>
+  </Provider>,
   document.getElementById("container")
 );
+
+// This will be invisible, window is hidden.
+// There's nothing to see at '/'.
 navigateTo("/");

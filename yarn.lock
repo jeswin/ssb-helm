@@ -1300,9 +1300,9 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux-jetpack@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/redux-jetpack/-/redux-jetpack-0.0.9.tgz#192676614f16e91429f9298c56ecf07faec51f5a"
+redux-jetpack@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/redux-jetpack/-/redux-jetpack-0.0.11.tgz#f3b3eea42e9afaaa09e517334cdc188fed2c42bb"
   dependencies:
     "@types/react" "^16.0.38"
     "@types/react-redux" "^5.0.15"
