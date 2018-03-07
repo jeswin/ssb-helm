@@ -83,3 +83,10 @@ export function readConfig(): HelmConfig {
     )
   };
 }
+
+function readNetworkConfig(network: string) {
+  const ssbDir = getValueOrDefault(
+    n.dir,
+    n.name === "main" ? ".ssb" : `.ssb-${n.name}`
+  );
+}

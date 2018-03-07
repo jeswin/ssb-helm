@@ -22,12 +22,12 @@ ipcRenderer.on("loadUrl", (e: any, data: any) => {
 */
 const App = () =>
   Router({
-    index: <div>Home</div>,
+    index: <div>Nothing to see here.</div>,
     networks: (network: string) => ({
       add: <AddNewNetwork />,
       plugins: {
         manage() {
-          return <ManagePlugins />;
+          return <ManagePlugins network={network} />;
         }
       }
     })
