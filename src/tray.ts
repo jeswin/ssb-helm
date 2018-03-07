@@ -35,7 +35,7 @@ function makeMenuItemForNetwork(
             },
             {
               label: `Manage Plugins`,
-              click: () => ui.networks.managePlugins()
+              click: () => ui.networks.managePlugins(network.name)
             },
             {
               label: `Manage Space`
