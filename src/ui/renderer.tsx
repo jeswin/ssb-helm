@@ -10,8 +10,9 @@ import ManagePlugins from "./components/networks/ManagePlugins";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import * as configActions from "./actions/config";
+
 ipcRenderer.on("loadUrl", (e: any, data: any) => {
-  console.log(data);
   navigateTo(data.url);
 });
 
@@ -26,6 +27,7 @@ const App = () =>
       add: <AddNewNetwork />,
       plugins: {
         manage() {
+          configActions.loadPlugins(network);
           return <ManagePlugins network={network} />;
         }
       }
