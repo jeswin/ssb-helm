@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as fse from "fs-extra";
 import * as env from "./env";
-import { HelmConfig, LocalSBotConfig } from "../types";
+import { HelmConfig, LocalSBotConfig, SSBConfigJson } from "../types";
 import exception from "../exception";
 import { getValueOrDefault } from "../utils/type-utils";
 
@@ -13,7 +13,7 @@ function isLocalHost(host: string) {
   return host && ["localhost", "127.0.0.1", "0.0.0.0"].includes(host);
 }
 
-export function readConfig(): HelmConfig {
+export async function readConfig(): Promise<HelmConfig> {
   const homeDir = env.getHomeDirectory();
   const configFile = path.join(homeDir, ".ssb-helm", "config");
 
@@ -29,52 +29,44 @@ export function readConfig(): HelmConfig {
   return {
     networks:
       typeof configFromFile.networks !== "undefined"
-        ? configFromFile.networks.map(n => {
-            return n.type === "remote"
-              ? n
-              : (() => {
-                  const ssbDir = getValueOrDefault(
-                    n.dir,
-                    n.name === "main" ? ".ssb" : `.ssb-${n.name}`
-                  );
+        ? await Promise.all(
+            configFromFile.networks.map(
+              async n =>
+                n.type === "remote"
+                  ? n
+                  : await (async () => {
+                      const ssbDir = n.name === "main" ? ".ssb" : `.${n.name}`;
+                      const ssbNetworkConfig = await readNetworkConfig(n.name);
 
-                  const ssbNetworkConfigPath = path.join(
-                    homeDir,
-                    ssbDir,
-                    "config"
-                  );
+                      const localNetwork: LocalSBotConfig = {
+                        type: "local",
+                        name: n.name,
+                        host: "localhost",
+                        port: "8008",
+                        plugins: ssbNetworkConfig.plugins,
+                        caps: ssbNetworkConfig.caps
+                          ? {
+                              shs: ssbNetworkConfig.caps.shs,
+                              sign: ssbNetworkConfig.caps.sign
+                            }
+                          : undefined,
+                        keys: isLocalHost(n.host)
+                          ? n.keys
+                          : (() => {
+                              const secretPath = path.join(
+                                homeDir,
+                                ssbDir,
+                                "secret"
+                              );
+                              const keys = ssbKeys.loadSync(secretPath);
+                              return { id: keys.id, public: keys.public };
+                            })()
+                      };
 
-                  const ssbNetworkConfig = JSON.parse(
-                    fse.readFileSync(ssbNetworkConfigPath).toString()
-                  );
-
-                  const localNetwork: LocalSBotConfig = {
-                    type: "local",
-                    name: n.name,
-                    host: "localhost",
-                    port: "8008",
-                    caps: ssbNetworkConfig.caps
-                      ? {
-                          shs: ssbNetworkConfig.caps.shs,
-                          sign: ssbNetworkConfig.caps.sign
-                        }
-                      : undefined,
-                    keys: isLocalHost(n.host)
-                      ? n.keys
-                      : (() => {
-                          const secretPath = path.join(
-                            homeDir,
-                            ssbDir,
-                            "secret"
-                          );
-                          const keys = ssbKeys.loadSync(secretPath);
-                          return { id: keys.id, public: keys.public };
-                        })()
-                  };
-
-                  return localNetwork;
-                })();
-          })
+                      return localNetwork;
+                    })()
+            )
+          )
         : [{ type: "local", name: "main", host: "localhost", port: "8008" }],
     activeNetworks: getValueOrDefault(configFromFile.activeNetworks, ["main"]),
     rememberActiveNetworks: getValueOrDefault(
@@ -84,9 +76,19 @@ export function readConfig(): HelmConfig {
   };
 }
 
-function readNetworkConfig(network: string) {
-  const ssbDir = getValueOrDefault(
-    n.dir,
-    n.name === "main" ? ".ssb" : `.ssb-${n.name}`
-  );
+export async function readNetworkConfig(
+  network: string
+): Promise<SSBConfigJson> {
+  const homeDir = env.getHomeDirectory();
+  const ssbDir = network === "main" ? ".ssb" : `.${network}`;
+
+  const ssbNetworkConfigPath = path.join(homeDir, ssbDir, "config");
+
+  const config = JSON.parse(
+    (await fse.readFile(ssbNetworkConfigPath)).toString()
+  ) as SSBConfigJson;
+
+  console.log(ssbNetworkConfigPath, config);
+
+  return config;
 }

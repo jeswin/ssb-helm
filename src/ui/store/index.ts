@@ -4,11 +4,9 @@ import * as jetpack from "redux-jetpack";
 export type Plugins = {
   network: string;
   isLoading: boolean;
-  plugins: string[];
-};
-
-export type PluginsLoading = {
-  isLoading: boolean;
+  plugins: {
+    [key: string]: boolean
+  };
 };
 
 export type State = {

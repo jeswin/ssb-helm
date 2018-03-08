@@ -6,7 +6,6 @@ import { Router, navigateTo } from "sailboat";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
-import AppBar from "material-ui/AppBar";
 import ManagePlugins from "./components/networks/ManagePlugins";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -23,7 +22,7 @@ ipcRenderer.on("loadUrl", (e: any, data: any) => {
 const App = () =>
   Router({
     index: <div>Nothing to see here.</div>,
-    networks: (network: string) => ({
+    networks: async (network: string) => ({
       add: <AddNewNetwork />,
       plugins: {
         manage() {
