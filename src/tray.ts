@@ -41,7 +41,7 @@ function makeMenuItemForNetwork(
               label: `Manage Space`
             },
             {
-              label: `Settings`
+              label: `Configuration`
             }
           ]
         : [
@@ -49,7 +49,7 @@ function makeMenuItemForNetwork(
               label: "Generate Invite"
             },
             {
-              label: "Settings"
+              label: "Configuration"
             }
           ]
   };

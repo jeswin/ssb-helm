@@ -45,11 +45,13 @@ function ManagePlugins({
         </RaisedButton>
       </p>
       <p style={{ color: grey700 }}>
-        WARNING: Do not add plugins that you do not trust.
+        WARNING: Do not add plugins that you don't trust.
       </p>
     </div>
   ) : (
-    <div>alright then!</div>
+    <div>
+      <h1>Loading...</h1>
+    </div>
   );
 }
 
