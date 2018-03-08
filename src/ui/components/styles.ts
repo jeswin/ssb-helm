@@ -24,12 +24,8 @@ export default {
     width: "160px",
     textAlign: "top"
   },
-  widths: {
-    std: {
-      //width: "160px"
-    }
-  },
-  links: {
-    color: blue500
+  actionLinks: {
+    color: blue500,
+    fontSize: "0.8em"
   }
 };

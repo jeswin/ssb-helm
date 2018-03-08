@@ -31,7 +31,8 @@ function makeMenuItemForNetwork(
             {
               label: !config.activeNetworks.includes(network.name)
                 ? "Start"
-                : "Stop"
+                : "Stop",
+              click: () => {}
             },
             {
               label: `Manage Plugins`,

@@ -16,14 +16,14 @@ export default function() {
         <tr>
           <td style={styles.label}>Network Name</td>
           <td>
-            <TextField style={{ ...styles.widths.std }} />
+            <TextField />
           </td>
         </tr>
         <tr>
           <td style={styles.label}>Network Key</td>
           <td>
-            <TextField style={{ ...styles.widths.std }} />&nbsp;<a
-              style={{ ...styles.links }}
+            <TextField />&nbsp;<a
+              style={{ ...styles.actionLinks }}
               href="#"
             >
               auto generate?
@@ -33,8 +33,8 @@ export default function() {
         <tr>
           <td style={styles.label}>Sign Key</td>
           <td>
-            <TextField style={{ ...styles.widths.std }} />&nbsp;<a
-              style={{ ...styles.links }}
+            <TextField />&nbsp;<a
+              style={{ ...styles.actionLinks }}
               href="#"
             >
               auto generate?
