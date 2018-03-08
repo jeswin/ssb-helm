@@ -41,7 +41,8 @@ function makeMenuItemForNetwork(
               label: `Manage Space`
             },
             {
-              label: `Configuration`
+              label: `Configuration`,
+              click: () => ui.networks.configuration(network.name)
             }
           ]
         : [

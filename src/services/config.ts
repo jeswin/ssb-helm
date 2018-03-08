@@ -88,7 +88,5 @@ export async function readNetworkConfig(
     (await fse.readFile(ssbNetworkConfigPath)).toString()
   ) as SSBConfigJson;
 
-  console.log(ssbNetworkConfigPath, config);
-
   return config;
 }

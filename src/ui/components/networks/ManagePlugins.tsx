@@ -4,15 +4,7 @@ import { connect } from "redux-jetpack";
 import { State, Plugins } from "../../store";
 import { TextField, Toggle, RaisedButton } from "material-ui";
 import { orange500, grey700 } from "material-ui/styles/colors";
-
-const styles = {
-  hintStyle: {
-    color: orange500
-  },
-  toggle: {
-    marginBottom: 16
-  }
-};
+import styles from "../styles";
 
 function ManagePlugins({
   network,
@@ -36,9 +28,8 @@ function ManagePlugins({
       <h3 style={{ marginTop: "2em" }}>Add a new plugin</h3>
       <p>
         <TextField
-          style={{ width: 200 }}
+          style={{ width: 160 }}
           hintText="Plugin name"
-          hintStyle={styles.hintStyle}
         />&nbsp;
         <RaisedButton style={{ width: 100 }} primary={true}>
           Add

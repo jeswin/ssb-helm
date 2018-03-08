@@ -4,16 +4,8 @@ import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import { FormEvent } from "react";
 import LocalNetwork from "./LocalNetwork";
 import RemoteNetwork from "./RemoteNetwork";
+import styles from "../styles";
 
-const styles = {
-  block: {
-    maxWidth: 250
-  },
-  radioButton: {
-    marginBottom: 16,
-    width: 140
-  }
-};
 
 type State = {
   networkType: string;

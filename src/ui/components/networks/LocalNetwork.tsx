@@ -7,42 +7,41 @@ import {
   Checkbox,
   Toggle
 } from "material-ui";
-import { orange500, blue500 } from "material-ui/styles/colors";
-
-const styles = {
-  hintStyle: {
-    color: orange500
-  },
-  toggle: {
-    marginBottom: 16
-  }
-};
+import styles from "../styles";
 
 export default function() {
   return (
     <div>
-      <p>
-        <TextField
-          hintText="Name of your network"
-          hintStyle={styles.hintStyle}
-        />
-      </p>
-      <p>
-        <TextField
-          hintText="Network Key (optional)"
-          hintStyle={styles.hintStyle}
-        />
-        &nbsp;
-        <FlatButton>Generate</FlatButton>
-      </p>
-      <p>
-        <TextField
-          hintText="Sign Key (optional)"
-          hintStyle={styles.hintStyle}
-        />
-        &nbsp;
-        <FlatButton>Generate</FlatButton>
-      </p>
+      <table>
+        <tr>
+          <td style={styles.label}>Network Name</td>
+          <td>
+            <TextField style={{ ...styles.widths.std }} />
+          </td>
+        </tr>
+        <tr>
+          <td style={styles.label}>Network Key</td>
+          <td>
+            <TextField style={{ ...styles.widths.std }} />&nbsp;<a
+              style={{ ...styles.links }}
+              href="#"
+            >
+              auto generate?
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style={styles.label}>Sign Key</td>
+          <td>
+            <TextField style={{ ...styles.widths.std }} />&nbsp;<a
+              style={{ ...styles.links }}
+              href="#"
+            >
+              auto generate?
+            </a>
+          </td>
+        </tr>
+      </table>
       <p>
         <Toggle
           labelPosition="right"

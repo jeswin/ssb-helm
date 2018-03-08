@@ -7,6 +7,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import ManagePlugins from "./components/networks/ManagePlugins";
+import Configuration from "./components/networks/Configuration";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -30,6 +31,9 @@ const App = () =>
           configActions.loadPlugins(network);
           return <ManagePlugins network={network} />;
         }
+      },
+      configuration() {
+        return <Configuration network={network} />
       }
     })
   });
