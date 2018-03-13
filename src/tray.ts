@@ -23,37 +23,40 @@ function makeMenuItemForNetwork(
   network: NetworkConfig,
   config: HelmConfig
 ): NetworkMenuItem {
+  function getLocalSubmenu() {
+    // Local sbots have data in the user's home dir.
+    // The main sbot lives in '.ssb'.
+    return [
+      {
+        label: !config.activeNetworks.includes(network.name) ? "Start" : "Stop",
+        click: () => {}
+      },
+      {
+        label: `Manage Plugins`,
+        click: () => ui.networks.managePlugins(network.name)
+      },
+      {
+        label: `Manage Space`
+      },
+      {
+        label: `Configuration`,
+        click: () => ui.networks.configuration(network.name)
+      }
+    ];
+  }
+
+  // Remote sbots run on remote servers.
+  // Can't be configured via helm.
+  // Later we can think about some API to add plugins to a remote sbot
+  function getRemoteSubmenu() {
+    return [{ label: "Generate Invite" }, { label: "Configuration" }];
+  }
+
   return {
-    label: network.name,
-    submenu:
-      network.type === "local"
-        ? [
-            {
-              label: !config.activeNetworks.includes(network.name)
-                ? "Start"
-                : "Stop",
-              click: () => {}
-            },
-            {
-              label: `Manage Plugins`,
-              click: () => ui.networks.managePlugins(network.name)
-            },
-            {
-              label: `Manage Space`
-            },
-            {
-              label: `Configuration`,
-              click: () => ui.networks.configuration(network.name)
-            }
-          ]
-        : [
-            {
-              label: "Generate Invite"
-            },
-            {
-              label: "Configuration"
-            }
-          ]
+    label: config.activeNetworks.includes(network.name)
+      ? `${network.name} (Active)`
+      : network.name,
+    submenu: network.type === "local" ? getLocalSubmenu() : getRemoteSubmenu()
   };
 }
 
