@@ -25,13 +25,13 @@
     "@types/react" "*"
     "@types/react-addons-linked-state-mixin" "*"
 
-"@types/node@*":
-  version "9.4.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
+"@types/node@*", "@types/node@^9.4.7":
+  version "9.4.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
 "@types/node@^8.0.24":
-  version "8.9.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.4.tgz#dfd327582a06c114eb6e0441fa3d6fab35edad48"
+  version "8.9.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.5.tgz#162b864bc70be077e6db212b322754917929e976"
 
 "@types/react-addons-linked-state-mixin@*":
   version "0.14.19"
@@ -1292,9 +1292,9 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux-jetpack@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/redux-jetpack/-/redux-jetpack-0.0.12.tgz#fc4c1789ab109216be60ef4e6168a252fbaf5c10"
+redux-jetpack@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/redux-jetpack/-/redux-jetpack-0.0.14.tgz#7dac2815805b343c7af626bf5b87eb22f3595c00"
   dependencies:
     "@types/react" "^16.0.40"
     "@types/react-redux" "^5.0.15"
@@ -1373,10 +1373,11 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-sailboat@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/sailboat/-/sailboat-0.0.8.tgz#948ae3985e7170167e351509e4c34f1be2505ae8"
+sailboat@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/sailboat/-/sailboat-0.0.9.tgz#de1c97b38211228a9a3d4ffb2c35973afc7dae9c"
   dependencies:
+    "@types/node" "^9.4.7"
     "@types/react" "^16.0.38"
     "@types/react-dom" "^16.0.4"
     "@types/url-parse" "^1.1.0"

@@ -43,7 +43,7 @@ function Configuration({ network }: { network: string }) {
           <td style={styles.selectLabel}>Pub?</td>
           <td>
             <SelectField autoWidth={true}>
-              <MenuItem value={undefined} primaryText="Auto" />
+              <MenuItem value={undefined} primaryText="Default (No)" />
               <MenuItem value={true} primaryText="Yes" />
               <MenuItem value={false} primaryText="No" />
             </SelectField>
@@ -53,7 +53,7 @@ function Configuration({ network }: { network: string }) {
           <td style={styles.selectLabel}>Local?</td>
           <td>
             <SelectField autoWidth={true}>
-              <MenuItem value={undefined} primaryText="Auto" />
+              <MenuItem value={undefined} primaryText="Default (Yes)" />
               <MenuItem value={true} primaryText="Yes" />
               <MenuItem value={false} primaryText="No" />
             </SelectField>

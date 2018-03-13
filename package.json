@@ -29,8 +29,8 @@
     "fs-extra": "^5.0.0",
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
-    "redux-jetpack": "^0.0.12",
-    "sailboat": "^0.0.8",
+    "redux-jetpack": "^0.0.14",
+    "sailboat": "^0.0.9",
     "ssb-client": "^4.5.7"
   }
 }
